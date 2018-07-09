@@ -1,0 +1,7 @@
+error_*
+tracking_*
+.idea/
+.DS_Store
+new/
+vendor/*
+!vendor/vendor.json
