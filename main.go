@@ -92,12 +92,39 @@ func main() {
 					fmt.Println("target file (-f/--file) is not defined under single mode")
 					return nil
 				}
-				targeGroup := c.String("group")
-				if targeGroup == "" {
+				targetGroup := c.String("group")
+				if targetGroup == "" {
 					fmt.Println("target group (-g/--group) is not defined under single mode")
 					return nil
 				}
-
+				// TODO processing single upload
+				return nil
+			},
+		},
+		{
+			Name:  "create",
+			Usage: "Create a face group to eyes-argus",
+			Action: func(c *cli.Context) error {
+				userName := c.String("username")
+				if userName == "" {
+					fmt.Println("username is not defined")
+					return nil
+				}
+				password := c.String("password")
+				if password == "" {
+					fmt.Println("password is not defined")
+					return nil
+				}
+				endpoint := c.String("endpoint")
+				if endpoint == "" {
+					fmt.Println("endpoint is not defined")
+					return nil
+				}
+				targetGroup := c.String("group")
+				if targetGroup == "" {
+					fmt.Println("target group (-g/--group) is not defined under single mode")
+					return nil
+				}
 				// TODO processing single upload
 				return nil
 			},
@@ -153,8 +180,15 @@ func main() {
 	}
 }
 
-func singleUpload() (err error) {
+func singleUpload(username, password, targetFileName, endpoint string) (err error) {
 	// TODO
+	var token string
+	fmt.Printf("connecting to %v", endpoint)
+	token, err = login(username, password, endpoint)
+	if err != nil {
+		return err
+	}
+	fmt.Println(" --> login success!")
 	return nil
 }
 
